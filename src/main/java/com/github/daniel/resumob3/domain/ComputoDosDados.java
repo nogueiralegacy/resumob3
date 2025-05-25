@@ -1,4 +1,5 @@
-package com.github.daniel.resumob3.domain.negociacao;
+/*
+package com.github.daniel.resumob3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +10,10 @@ public class ComputoDosDados {
         Negociacao resumoNegociacoesCompra = resumoNegocicoes(todas, ativo, TipoDeMovimentacao.COMPRA);
         Negociacao resumoNegociacoesVenda = resumoNegocicoes(todas, ativo, TipoDeMovimentacao.VENDA);
 
-        int quantidadeNegociada = (resumoNegociacoesCompra.getQuantidadeNegociada()
-                - resumoNegociacoesVenda.getQuantidadeNegociada());
-        double valorTotalNegociado = resumoNegociacoesCompra.getValorTotalNegociado()
-                - resumoNegociacoesVenda.getValorTotalNegociado();
+        int quantidadeNegociada = (resumoNegociacoesCompra.getQuantidade()
+                - resumoNegociacoesVenda.getQuantidade());
+        double valorTotalNegociado = resumoNegociacoesCompra.getValor()
+                - resumoNegociacoesVenda.getValor();
         double precoMedio = 0.0;
         try {
             precoMedio = valorTotalNegociado / quantidadeNegociada;
@@ -32,8 +33,8 @@ public class ComputoDosDados {
 
             for (Negociacao negociacao : negociacoesDeUmAtivo) {
                 if (negociacao.getTipoDeMovimentacao().equals(tipoDeMovimentacao)) {
-                    quantidadeNegociada += negociacao.getQuantidadeNegociada();
-                    valorTotalNegociado += negociacao.getValorTotalNegociado();
+                    quantidadeNegociada += negociacao.getQuantidade();
+                    valorTotalNegociado += negociacao.getValor();
                 }
             }
 
@@ -45,7 +46,7 @@ public class ComputoDosDados {
     public static List<Negociacao> negociacoesDeUmAtivo(List<Negociacao> todas, String ativo) {
     List<Negociacao> negociacoesDeUmAtivo = new ArrayList<>();
     for (Negociacao negociacao : todas) {
-        if (negociacao.getAtivo().equals(ativo)) {
+        if (negociacao.getCodigoDeNegociacao().equals(ativo)) {
             negociacoesDeUmAtivo.add(negociacao);
         }
     }
@@ -56,11 +57,12 @@ public class ComputoDosDados {
         List<String> ativos = new ArrayList<>();
 
         for (Negociacao negociacao : todas) {
-            if (!ativos.contains(negociacao.getAtivo())) {
-                ativos.add(negociacao.getAtivo());
+            if (!ativos.contains(negociacao.getCodigoDeNegociacao())) {
+                ativos.add(negociacao.getCodigoDeNegociacao());
             }
         }
 
         return ativos;
     }
 }
+*/

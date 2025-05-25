@@ -1,3 +1,4 @@
+/*
 package com.github.daniel.resumob3.application;
 
 public class Main {
@@ -12,3 +13,4 @@ public class Main {
         return 0;
     }
 }
+*/

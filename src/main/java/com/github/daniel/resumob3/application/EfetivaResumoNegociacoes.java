@@ -1,8 +1,11 @@
+/*
 package com.github.daniel.resumob3.application;
 
-import com.github.daniel.resumob3.domain.negociacao.*;
-import com.github.daniel.resumob3.io.CSVResumoRepository;
-import com.github.daniel.resumob3.io.XLSXNegociacaoRepository;
+import com.github.daniel.resumob3.domain.ComputoDosDados;
+import com.github.daniel.resumob3.domain.Negociacao;
+import com.github.daniel.resumob3.repository.ExtratoNegociacaoRepository;
+import com.github.daniel.resumob3.io.CSVExtratoNegociacaoRepository;
+import com.github.daniel.resumob3.io.XLSXExtratoNegociacaoRepository;
 
 import java.awt.*;
 import java.io.File;
@@ -33,7 +36,7 @@ public class EfetivaResumoNegociacoes extends Component {
 
 
 
-        NegociacaoRepository negociacaoRepo = new XLSXNegociacaoRepository();
+        NegociacaoRepository negociacaoRepo = new XLSXExtratoNegociacaoRepository();
 
         FileInputStream fileInputStream;
 
@@ -54,10 +57,11 @@ public class EfetivaResumoNegociacoes extends Component {
             resumo.addResumoNegociacoes(resumoNegociacao);
         }
 
-        ResumoRepository resumoRepo = new CSVResumoRepository();
+        ExtratoNegociacaoRepository resumoRepo = new CSVExtratoNegociacaoRepository();
         resumoRepo.save(resumo, fileOutputStream);
 
         System.out.println("Resumo gerado com sucesso!");
         System.out.println("Arquivo salvo em: " + pathResumo);
     }
 }
+*/

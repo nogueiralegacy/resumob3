@@ -1,14 +1,14 @@
+/*
 package com.github.daniel.resumob3.io;
 
-import com.github.daniel.resumob3.domain.negociacao.Negociacao;
-import com.github.daniel.resumob3.domain.negociacao.Resumo;
-import com.github.daniel.resumob3.domain.negociacao.ResumoRepository;
+import com.github.daniel.resumob3.domain.Negociacao;
+import com.github.daniel.resumob3.repository.ExtratoNegociacaoRepository;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
 
-public class CSVResumoRepository implements ResumoRepository {
+public class CSVExtratoNegociacaoRepository implements ExtratoNegociacaoRepository {
     // Formatação dos valores monetátios para o padrão nacional.
     DecimalFormat df = new DecimalFormat("#,##0.00");
 
@@ -46,15 +46,15 @@ public class CSVResumoRepository implements ResumoRepository {
             sb.append(";");
             sb.append(resumoNegociacao.getAtivo());
             sb.append(";");
-            sb.append("R$ " + df.format(resumoNegociacao.getPrecoNegociado()));
+            sb.append("R$ " + df.format(resumoNegociacao.getPreco()));
             sb.append(";");
-            sb.append(resumoNegociacao.getQuantidadeNegociada());
+            sb.append(resumoNegociacao.getQuantidade());
             sb.append(";");
-            sb.append("R$ " + df.format(resumoNegociacao.getValorTotalNegociado()));
+            sb.append("R$ " + df.format(resumoNegociacao.getValor()));
             sb.append("\n");
-            valorTotalNegociado += resumoNegociacao.getValorTotalNegociado();
+            valorTotalNegociado += resumoNegociacao.getValor();
         }
         sb.append("Valor Total Negociado: " + "R$ " + df.format(valorTotalNegociado));
         return sb.toString();
     }
-}
+}*/
