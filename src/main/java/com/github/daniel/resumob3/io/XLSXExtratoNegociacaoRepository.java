@@ -2,8 +2,10 @@ package com.github.daniel.resumob3.io;
 
 import com.github.daniel.resumob3.domain.ExtratoNegociacao;
 import com.github.daniel.resumob3.domain.Negociacao;
+import com.github.daniel.resumob3.domain.ResumoExtratoNegociacao;
 import com.github.daniel.resumob3.domain.TipoDeMovimentacao;
 import com.github.daniel.resumob3.repository.ExtratoNegociacaoRepository;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -11,15 +13,18 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Repository;
 
-import java.io.*;
-
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.github.daniel.resumob3.utils.Utils.convertStringToDate;
+
+@Setter
 @Slf4j
 @Repository
 public class XLSXExtratoNegociacaoRepository implements ExtratoNegociacaoRepository {
@@ -89,7 +94,8 @@ public class XLSXExtratoNegociacaoRepository implements ExtratoNegociacaoReposit
         return new ExtratoNegociacao(todas);
     }
 
-    private Date convertStringToDate(String date) throws ParseException {
-        return new SimpleDateFormat("dd/MM/yyyy").parse(date);
+    @Override
+    public Path exportar(ResumoExtratoNegociacao resumoExtratoNegociacao, String diretorio) throws IOException {
+        return null;
     }
 }

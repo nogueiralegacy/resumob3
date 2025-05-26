@@ -6,9 +6,7 @@ import com.github.daniel.resumob3.domain.TipoDeMovimentacao;
 import com.github.daniel.resumob3.repository.ExtratoNegociacaoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -23,7 +21,8 @@ public class ExtratoNegociacaoService {
         Map<String, ResumoAtivo> mapaDeAtivos = new HashMap<>();
 
         extratoNegociacao.getNegociacoes().forEach(negociacao -> {
-            String codigo = negociacao.getCodigoDeNegociacao();
+            String codigo = negociacao.getCodigoDeNegociacao().replaceFirst("F$", "");
+
 
             // Obtém o resumo existente ou cria um novo se não existir
             ResumoAtivo resumo = mapaDeAtivos.computeIfAbsent(codigo, ResumoAtivo::new);

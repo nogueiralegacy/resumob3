@@ -1,4 +1,3 @@
-/*
 package com.github.daniel.resumob3.application;
 
 public class Main {
@@ -7,10 +6,8 @@ public class Main {
     }
 
     static int start() {
-        EfetivaResumoNegociacoes efetivaResumo = new EfetivaResumoNegociacoes();
-
-        efetivaResumo.efetivaOperacao();
+        EfetivaResumoNegociacoes.efetivaOperacao();
         return 0;
     }
 }
-*/
+
