@@ -1,12 +1,14 @@
 package com.github.daniel.resumob3.domain;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Builder
-@Data
+@Getter
+@Setter
 public class Negociacao {
     private Date dataDoNegocio;
     private TipoDeMovimentacao tipoDeMovimentacao;

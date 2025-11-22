@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -50,39 +51,38 @@ public class CSVExtratoNegociacaoRepository implements ExtratoNegociacaoReposito
 
     private void escreverSecaoAtivos(ResumoExtratoNegociacao resumoExtratoNegociacao, BufferedWriter writer) throws IOException {
         // Cabeçalho
-        writer.write("Código,Quantidade Comprada,Quantidade Vendida,Preço Médio," +
-                "Capital Investido Bruto,Capital Resgatado Bruto,Capital Investido Líquido,Montante Movimentado");
+        writer.write("Código,Quantidade Comprada,Quantidade Vendida,Quantidade Atual na Carteira,Preço Médio");
         writer.newLine();
 
         // Dados por ativo
         for (ResumoAtivo ativo : resumoExtratoNegociacao.getResumoAtivos().values()) {
-            writer.write(String.format("%s,%d,%d,%.2f,%.2f,%.2f,%.2f,%.2f",
+            writer.write(String.format("%s,%d,%d,%d,%.2f",
                     escapeCsv(ativo.getCodigo()),
                     ativo.getQuantidadeComprada(),
                     ativo.getQuantidadeVendida(),
-                    ativo.getPrecoMedio(),
-                    ativo.getCapitalInvestidoBruto(),
-                    ativo.getCapitalResgatadoBruto(),
-                    ativo.calcularCapitalInvestidoLiquido(),
-                    ativo.calcularMontanteMovimentado()));
+                    ativo.getQuantidadeAtualNaCarteira(),
+                    ativo.getPrecoMedio()));
             writer.newLine();
         }
     }
 
     private void escreverResumoGeral(ResumoExtratoNegociacao resumoExtratoNegociacao, BufferedWriter writer) throws IOException {
         // Cabeçalho
-        writer.write("Capital Investido Bruto,Capital Resgatado Bruto,Capital Investido Líquido," +
-                "Montante Movimentado,Quantidade Comprada,Quantidade Vendida");
+        writer.write("Data Início,Data Fim");
         writer.newLine();
 
+        // Formata as datas
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dataInicio = resumoExtratoNegociacao.getDataInicio() != null 
+                ? dateFormat.format(resumoExtratoNegociacao.getDataInicio()) 
+                : "";
+        String dataFim = resumoExtratoNegociacao.getDataFim() != null 
+                ? dateFormat.format(resumoExtratoNegociacao.getDataFim()) 
+                : "";
+
         // Dados do resumo geral
-        writer.write(String.format("%.2f,%.2f,%.2f,%.2f,%.0f,%.0f",
-                resumoExtratoNegociacao.getCapitalInvestidoBruto(),
-                resumoExtratoNegociacao.getCapitalResgatadoBruto(),
-                resumoExtratoNegociacao.calcularCapitalInvestidoLiquido(),
-                resumoExtratoNegociacao.calcularMontanteMovimentado(),
-                resumoExtratoNegociacao.getQuantidadeComprada(),
-                resumoExtratoNegociacao.getQuantidadeVendida()));
+        writer.write(String.format("%s,%s", dataInicio, dataFim));
+        writer.newLine();
     }
 
     /**

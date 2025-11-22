@@ -3,40 +3,26 @@ package com.github.daniel.resumob3.domain;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
+import java.time.Duration;
+import java.util.Date;
 import java.util.Map;
 
 @Slf4j
 @Getter
 public class ResumoExtratoNegociacao {
     private final Map<String, ResumoAtivo> resumoAtivos;
-    private double capitalInvestidoBruto;
-    private double capitalResgatadoBruto;
-    private double quantidadeComprada;
-    private double quantidadeVendida;
+    private final Date dataInicio;
+    private final Date dataFim;
 
-    public ResumoExtratoNegociacao(Map<String, ResumoAtivo> resumoAtivos) {
+    public ResumoExtratoNegociacao(Map<String, ResumoAtivo> resumoAtivos, Date inicio, Date fim) {
         if (resumoAtivos == null) {
             log.error("Erro ao criar {}", getClass().getSimpleName());
             throw new IllegalStateException();
         }
 
         this.resumoAtivos = resumoAtivos;
-
-        for (ResumoAtivo resumoAtivo : resumoAtivos.values()) {
-            this.capitalInvestidoBruto += resumoAtivo.getCapitalInvestidoBruto();
-            this.capitalResgatadoBruto += resumoAtivo.getCapitalResgatadoBruto();
-            this.quantidadeComprada += resumoAtivo.getQuantidadeComprada();
-            this.quantidadeVendida += resumoAtivo.getQuantidadeVendida();
-        }
-    }
-
-    public double calcularCapitalInvestidoLiquido() {
-        return capitalInvestidoBruto - capitalResgatadoBruto;
-    }
-
-    public double calcularMontanteMovimentado() {
-        return capitalInvestidoBruto + capitalResgatadoBruto;
+        this.dataInicio = inicio;
+        this.dataFim = fim;
     }
 }
 

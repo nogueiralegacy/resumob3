@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ExtratoNegociacaoServiceTest {
+public class ResumeExtratoNegociacaoServiceTest {
     private ExtratoNegociacaoRepository extratoNegociacaoRepository;
 
     @BeforeEach
@@ -24,8 +24,8 @@ public class ExtratoNegociacaoServiceTest {
 
     @Test
     void contabilizaNegociacoesSucesso() {
-        Map<String, ResumoAtivo> resumoAtivos = new ExtratoNegociacaoService(extratoNegociacaoRepository)
-                .contabilizarNegociacoes();
+        Map<String, ResumoAtivo> resumoAtivos = ResumeExtratoNegociacaoService
+                .contabilizarNegociacoes(extratoNegociacaoRepository.load()).getResumoAtivos();
 
         assertEquals(3, resumoAtivos.size());
         assertEquals(3, resumoAtivos.get("BTLG11").getQuantidadeComprada());

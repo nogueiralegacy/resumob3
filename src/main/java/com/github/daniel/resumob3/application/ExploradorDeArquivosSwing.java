@@ -2,11 +2,20 @@ package com.github.daniel.resumob3.application;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 import java.io.File;
 
-public class ExploradorDeArquivosSwing extends Component {
+public class ExploradorDeArquivosSwing {
+    
     public File selecionarArquivo(String titulo, String descricao, String extensao) {
+        // Garante que o Look and Feel do sistema seja usado
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            // Se não conseguir definir, continua com o padrão
+            System.err.println("Aviso: Não foi possível definir o Look and Feel do sistema.");
+        }
+
+        // Cria o JFileChooser
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle(titulo);
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -14,16 +23,13 @@ public class ExploradorDeArquivosSwing extends Component {
         FileNameExtensionFilter filter = new FileNameExtensionFilter(descricao, extensao);
         fileChooser.setFileFilter(filter);
 
-        int retorno = fileChooser.showOpenDialog(this);
+        // Mostra o diálogo de forma modal
+        int retorno = fileChooser.showOpenDialog(null);
 
-        File file;
         if (retorno == JFileChooser.APPROVE_OPTION) {
-            file = fileChooser.getSelectedFile();
-        }
-        else {
+            return fileChooser.getSelectedFile();
+        } else {
             return null;
         }
-
-        return file;
     }
 }
